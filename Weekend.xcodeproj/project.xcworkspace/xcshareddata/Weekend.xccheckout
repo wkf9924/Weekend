@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AC2F59A7-2479-4779-915E-3D924F2B4F19</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Weekend</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8FD2573E-B923-439F-A793-D1E3E5B0A000</key>
+		<string>https://github.com/wkf9924/Weekend.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Weekend.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8FD2573E-B923-439F-A793-D1E3E5B0A000</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/wkf9924/Weekend.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8FD2573E-B923-439F-A793-D1E3E5B0A000</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8FD2573E-B923-439F-A793-D1E3E5B0A000</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Weekend</string>
+		</dict>
+	</array>
+</dict>
+</plist>

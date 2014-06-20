@@ -1,0 +1,344 @@
+//单例模式
+
++ (Single *)sharedManager {
+    static Single *sharedSingle = nil;
+    
+    static dispatch_once_t predicate; dispatch_once(&predicate, ^{
+        sharedSingle = [[self alloc] init];
+    });
+    
+    return sharedSingle;
+    
+}
+
+//隐藏右边的item按钮
+    int tag = ApplicationDelegate.menuController.rightItem.tag;
+    if (tag == BAR_SHARE_TAG) {
+        [ApplicationDelegate.menuController.rightItem setEnabled:NO];
+        [ApplicationDelegate.menuController.rightItem setTintColor:[UIColor clearColor]];
+    }
+
+
+
+//为了简化使用ARC+GCD来创建单例，可以定义下面这样的一个宏：
+#define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
+static dispatch_once_t onceToken = 0; \
+__strong static id sharedInstance = nil; \
+dispatch_once(&amp;onceToken, ^{ \
+sharedInstance = block(); \
+}); \
+return sharedInstance; \
+
+
+//实例化的实现方法如下所示：
+//+ (BVARCSingleton *) sharedInstance
+//{
+//    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+//        return [[self alloc] init];
+//    });
+//}
+
+//去除换行符
+NSString* Version=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"string"];
+    
+Version=[Version stringByReplacingOccurrencesOfString: @"\r" withString:@""];
+Version=[Version stringByReplacingOccurrencesOfString: @"\n" withString:@"\\n"];
+
+*****************ios7适配ios
+if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height );
+}
+
+if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+[application setStatusBarStyle:UIStatusBarStyleLightContent];
+self.window.clipsToBounds =YES;
+self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+
+//Added on 19th Sep 2013
+self.window.bounds = CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height);
+}
+
+
+//ASIRequest
+
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/",SERVER,APPLY];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:urlString]];
+    for (NSString *key in [dictionaryAll allKeys]) {
+        NSString *value=[dictionaryAll objectForKey:key];
+        [request setPostValue:value forKey:key];
+    }
+    MBPHUD_SHOW;
+    [request setCompletionBlock:^{
+        MBPHUD_HIDDEN;
+        int status =request.responseStatusCode;
+        NSLog(@"%d",status);
+        NSDictionary *root = [JSONFunction jsonObjectWithData:request.responseData];
+        NSString *string = [root objectForKey:@"responseMessage"];
+        NSLog(@"状态：%@ \n root:==%@",string,root);
+        
+    }];
+    [request  setFailedBlock:^{
+        MBPHUD_HIDDEN;
+    }];
+    [request startAsynchronous];
+    
+    
+    //加载网络头像
+    [cell.imageView setImage:[UIImage imageNamed:@"3.jpeg"]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *img=[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:user.userHead]]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CATransition *trans=[CATransition animation];
+            [trans setDuration:0.25f];
+            [trans setType:@"flip"];
+            [trans setSubtype:kCATransitionFromLeft];
+            
+            [cell.imageView.layer addAnimation:trans forKey:nil];
+            [cell.imageView setImage:img];
+            
+        });
+    });
+
+
+ //执行删除操作
+    NSDictionary *userinfoDic = requestForm.userInfo;
+    int tag = [[userinfoDic objectForKey:@"tag"]  intValue];
+    [self.arrayCollect removeObjectAtIndex:tag];
+    [self.tableViewCollect deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:tag inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+ //日期格式化
+     NSDate *refund = [DateUtil stringToDate:[[self.payArray objectAtIndex:indexPath.row] objectForKey:@"takeTimeStr"] withFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *refundString = [DateUtil dateToString:refund withFormat:@"YYYY年MM月dd日 HH:mm"];
+        
+        
+            //一行两列数据排列方式
+    NSMutableDictionary *object =nil;
+    if((indexPath.row*2) <[self.AllProducts count]){
+        object = [self.AllProducts objectAtIndex:indexPath.row*2];
+    }
+    
+    NSMutableDictionary *object2 =nil;
+    if ((indexPath.row*2+1) <[self.AllProducts count]) {
+        object2 = [self.AllProducts objectAtIndex:indexPath.row*2+1];
+    }
+    
+
+//指定每个分区中有多少行，默认为1
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    NSLog(@"%d",self.AllProducts.count);
+    
+    return [self.AllProducts count]/2 + [self.AllProducts count]%2;
+}
+    
+    
+    + (id)shareDB{
+    static SQLiteOperation *sqlite_opration = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sqlite_opration = [[SQLiteOperation alloc] init];
+        [sqlite_opration readyDatabse];
+    });
+    return sqlite_opration;
+}
+
+//dateRequset
+NSString *urlString = [NSString stringWithFormat:@"%@/%@/",SERVER,APPLY];
+[DataRequest dataWithDic:common andRequestType:@"POST" andRequestCollectionAddressType:urlString andRequestSearchType:nil pageNum:1 andBlock:^(NSString *requestStr) {
+       NSMutableDictionary *root= [DataRequest jsonValue:requestStr];
+        NSLog(@"参与的活动：%@", root);
+        
+        NSString *successString = [[root objectForKey:@"success"] stringValue];
+        if (![successString isEqualToString:@"1"]) {
+            
+            return;
+        }
+        
+        NSArray *data = [root objectForKey:@"data"];
+        if (!ARRAY_IS_NOT_EMPTY(data)) {
+            return;
+        }
+        _tableViewPartake.hidden = NO;
+        self.arrParticipate = [NSMutableArray arrayWithArray:data];
+        [_tableViewPartake reloadData];
+
+    }];
+
+
+
+//header
+
+    NSString *token = [[Util getLoginData] objectForKey:@"token"];
+    NSString *uidString = [[[Util getLoginData] objectForKey:@"uid"] stringValue];
+    NSDictionary *dicUID = @{@"token":token, @"uid":uidString};
+    NSMutableDictionary *dicToken = [NSMutableDictionary dictionaryWithDictionary:dicUID];
+    [request setRequestHeaders:dicToken];
+
+
+//日期转换
+
+NSDate *refund = [DateUtil stringToDate:[[_activityArray objectAtIndex:indexPath.row] objectForKey:@"expiration"] withFormat:@"yyyy-MM-dd HH:mm:ss"];
+NSString *refundString = [DateUtil dateToString:refund withFormat:@"YYYY-MM-dd"];
+
+
+
+
+/**
+ *	@brief	设置统计的使能状态
+ *
+ *  @since  ver2.2.0
+ *  @deprecated 已过期，请使用allowExchangeDataEnabled方法代替
+ *
+ *	@param 	statEnabled 	YES表示使用统计功能，NO表示不使用统计功能
+ */
+ 
+ 
+ 3.创建自定义的UIBarButtonItem按钮
+
+-(UIBarButtonItem*)customLeftBackButton{
+    
+    UIImage *image = PNGIMAGE(@"返回");
+    
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    
+    btn.frame=CGRectMake(0, 0, image.size.width, image.size.height);
+    
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    
+    [btn addTarget:self action:@selector(popself) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    
+    return backItem;
+    
+}
+
+- (void)popself {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+//修改返回按钮
+-(void)resetNavigationBarBack{
+
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+
+    backItem.title = @"Back";
+
+    self.backBarButtonItem = backItem;
+
+    [backItem release];
+
+}
+
+self.navigationController.navigationBar.topItem.title = @"dddd";
+
+
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"CellIdentifier";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+    }
+
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",[_array objectAtIndex:indexPath.row]];
+    
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_objects removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        NSDate *object = _objects[indexPath.row];
+        self.detailViewController.detailItem = object;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSDate *object = _objects[indexPath.row];
+        [[segue destinationViewController] setDetailItem:object];
+    }
+}
+
+//处理圆形
+CALayer *l = [cell.imgAvatarImage layer];   //获取ImageView的层
+[l setMasksToBounds:YES];
+[l setCornerRadius:6.0];
+
+
+//改变导航标题颜色
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont systemFontSize],NSFontAttributeName,nil]];
+    
+    
+    
+    
+    
+    
+    
+       创建自定义的触摸手势来实现对键盘的隐藏                                 
+ - (void)viewDidLoad  
+    {  
+        [super viewDidLoad];  
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];  
+        //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。  
+        tapGestureRecognizer.cancelsTouchesInView = NO;  
+        //将触摸事件添加到当前view  
+        [self.view addGestureRecognizer:tapGestureRecognizer];  
+    }  
+      
+    -(void)keyboardHide:(UITapGestureRecognizer*)tap{  
+        [textFiled resignFirstResponder];  
+    }  
+    
+    
+    -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{  
+    [textFiled resignFirstResponder];  
+}
