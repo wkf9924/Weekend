@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RegVC : UIViewController
+#import "BaseViewController.h"
+@interface RegVC : BaseViewController
 
 @end

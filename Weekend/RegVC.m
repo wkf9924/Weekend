@@ -23,10 +23,23 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor redColor]];
+    [self addNavBt:@"back" select:@selector(back) opsition:NavbtOpsitionLeft title:@""];
+    
+
+}
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
