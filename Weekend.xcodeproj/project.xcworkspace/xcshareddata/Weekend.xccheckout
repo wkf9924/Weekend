@@ -14,7 +14,7 @@
 		<string>https://github.com/wkf9924/Weekend.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>trunk/Weekend.xcodeproj/project.xcworkspace</string>
+	<string>Weekend.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8FD2573E-B923-439F-A793-D1E3E5B0A000</key>

@@ -10,6 +10,11 @@
 
 @interface LoginVC ()
 
+@property (weak, nonatomic) IBOutlet UITextField *usernameTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet UIImageView *imageLineBg;
+@property (weak, nonatomic) IBOutlet UIImageView *imagePwdBg;
+
 @end
 
 @implementation LoginVC
@@ -69,6 +74,21 @@
 
 - (void)popself {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    if (textField == _usernameTF) {
+        [_imageLineBg setImage:PNGIMAGE(@"txt_hover")];
+        [_imagePwdBg setImage:PNGIMAGE(@"")];
+    }
+    
+    if (textField == _passwordTF) {
+        [_imageLineBg setImage:PNGIMAGE(@"")];
+        [_imagePwdBg setImage:PNGIMAGE(@"txt_hover")];
+    }
+    
 }
 
 

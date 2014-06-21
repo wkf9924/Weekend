@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Api.h"
-@interface LoginVC : BaseViewController
+@interface LoginVC : BaseViewController <UITextFieldDelegate>
 
 @end

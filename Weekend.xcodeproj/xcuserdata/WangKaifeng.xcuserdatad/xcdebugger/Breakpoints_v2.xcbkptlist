@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Weekend/LoginVC.m"
-            timestampString = "424842245.41848"
+            timestampString = "425058027.180247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "-customLeftBackButton"
             landmarkType = "5">
          </BreakpointContent>
