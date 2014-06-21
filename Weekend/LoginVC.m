@@ -81,11 +81,11 @@
     
     if (textField == _usernameTF) {
         [_imageLineBg setImage:PNGIMAGE(@"txt_hover")];
-        [_imagePwdBg setImage:PNGIMAGE(@"")];
+        [_imagePwdBg setImage:PNGIMAGE(@"zc_txt_normal_s")];
     }
     
     if (textField == _passwordTF) {
-        [_imageLineBg setImage:PNGIMAGE(@"")];
+        [_imageLineBg setImage:PNGIMAGE(@"zc_txt_normal_s")];
         [_imagePwdBg setImage:PNGIMAGE(@"txt_hover")];
     }
     
