@@ -14,11 +14,16 @@
 		<string>https://github.com/wkf9924/Weekend.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Weekend.xcodeproj/project.xcworkspace</string>
+	<string>trunk/Weekend.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>8FD2573E-B923-439F-A793-D1E3E5B0A000</key>
 		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>8FD2573E-B923-439F-A793-D1E3E5B0A000</key>
+		<string>https://github.com/wkf9924/Weekend.git</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/wkf9924/Weekend.git</string>
@@ -29,8 +34,12 @@
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>8FD2573E-B923-439F-A793-D1E3E5B0A000</string>
 			<key>IDESourceControlWCCName</key>
