@@ -27,8 +27,6 @@
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBarTintColor:[UIColor redColor]];
     [self addNavBt:@"back" select:@selector(back) opsition:NavbtOpsitionLeft title:@""];
-    
-
 }
 
 - (void)back {
